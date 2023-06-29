@@ -1,0 +1,55 @@
+PREFIX : <https://example.com/>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX odrl:  <http://www.w3.org/ns/odrl/2/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dcelements: <http://purl.org/dc/elements/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+
+:policy {
+    a [odrl:Offer] ; 
+    dcterms:identifier IRI;
+	dcterms:creator     xsd:string OR IRI ;
+	dcterms:description rdf:langString  ;
+	#dcterms:issued	xsd:date ;
+    dcterms:subject rdf:langString ; 
+    dcterms:title rdf:langString ;
+	odrl:permission IRI @:ruleShape ; 
+  
+}
+
+:ruleShape{
+   a [odrl:Permission] ; 
+   dcterms:identifier IRI;
+   dcterms:title rdf:langString;
+   odrl:action IRI @:actionShape;
+   odrl:assigner IRI @:partyShape; 
+   odrl:assignee IRI @:partyShape; 
+   odrl:constraint IRI @:constraintShape;
+   odrl:target IRI @:targetShape; 
+}
+
+:actionShape {
+   a [odrl:Action] ; 
+   dcterms:identifier IRI;
+}
+
+:constraintShape {
+   a [odrl:Constraint] ; 
+   dcterms:identifier IRI;
+   odrl:leftOperand IRI;
+   odrl:rightOperand IRI; 
+   odrl:operator IRI; 
+}
+
+:targetShape {
+  a [odrl:Asset];
+  dcterms:identifier IRI;
+  dcterms:title rdf:langString;
+}
+
+:partyShape {
+  a [odrl:Party] ;
+  dcterms:identifier IRI;
+  dcterms:title rdf:langString;
+}
